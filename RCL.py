@@ -109,6 +109,7 @@ class RCL:
                 self.vars = self.best_params[task_id][1]
         
 if __name__ == "__main__":
+    print("DEBUG : RCL.py step1. start...")
     parser = argparse.ArgumentParser(description='Reinforced Continual learning')
 
     # model parameters
@@ -151,16 +152,21 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     start = time.time()
-    jason = RCL(args)  
+    print("DEBUG : RCL.py start RCL train")
+    jason = RCL(args)
+    print("DEBUG : RCL.py end RCL train")
     end = time.time()
     params = jason.best_params
+    print("DEBUG : RCL.py step2. argparse finished...")
     if not os.path.exists(args.save_path):
         os.makedirs(args.save_path)
+    print("DEBUG : RCL.py step3. mkdir finished...")
     fname = "RCL_FC_" + args.data_path.split('/')[-1] + "_" + datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     fname += '_' + str(args.lr) + str("_") + str(args.n_epochs) + '_' + str(args.max_trials) + '_' + str(args.batch_size) + \
              '_' + args.bendmark + '_' + str(args.penalty) + '_' + args.optimizer + '_' + str(args.state_space) + '_' + \
              str(end-start) + '_' + args.method
     fname = os.path.join(args.save_path, fname)
+    print("DEBUG : RCL.py step4. fsave finished...")
     f = open(fname + '.txt', 'w')
     accuracy = []
     for index,value in params.items():
@@ -169,7 +175,9 @@ if __name__ == "__main__":
     print(accuracy,file=f)
     f.close()
     print(fname)
+    print("DEBUG : RCL.py step5. fclose for txt  finished...")
     name = fname + '.pkl'
     f = open(name, 'wb')
     pickle.dump(jason.result_process, f)
     f.close()
+    print("DEBUG : RCL.py step6. fclose for pkl finished...")
