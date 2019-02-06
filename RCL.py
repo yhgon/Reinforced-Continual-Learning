@@ -76,8 +76,9 @@ class RCL:
                         sess.run(tf.global_variables_initializer())
                         l = len(self.task_list[0][1])
                         for epoch in range(self.epochs):
+                            print("task {}  epoch {}  ".format(task_id, epoch  ) )                            
                             flag = 0
-                            for _ in range(l//self.batch_size+1):
+                            for _ in range(l//self.batch_size+1):                                
                                 batch_xs, batch_ys = (self.task_list[task_id][0][flag:flag+self.batch_size],self.task_list[task_id][1][flag:flag+self.batch_size])
                                 flag += self.batch_size
                                 sess.run(train_step,feed_dict={inputs:batch_xs, y:batch_ys})
