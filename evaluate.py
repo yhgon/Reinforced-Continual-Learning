@@ -77,7 +77,7 @@ class evaluate:
                 accuracy_test = self.sess.run(accuracy,feed_dict={self.x:self.task_list[task_id][4],
                                                                   self.y:self.task_list[task_id][5]})
                 if epoch%4==0 or epoch==self.epochs-1:
-                    print("task:%s,test accuracy:%s"%(task_id,accuracy_test))
+                    print("task:{}, epoch{} {}/{}  {}/{} test accuracy:{}".(task_id,   epoch,self.epochs, flag,l, accuracy_test) 
             self.var_list = self.sess.run(total_theta)
             self.stamps[task_id]=[_.shape for _ in self.var_list]
             self.sess.close()
