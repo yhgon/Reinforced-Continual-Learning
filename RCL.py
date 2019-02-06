@@ -134,11 +134,11 @@ if __name__ == "__main__":
     parser.add_argument('--seed', type=int, default=0,
                         help='random seed')
 
-    parser.add_argument('--save_path', type=str, default='/content/results/',
+    parser.add_argument('--save_path', type=str, default='/mnt/dataset/lsun/Reinforced-Continual-Learning/results/',
                         help='save models at the end of training')
 
     # data parameters
-    parser.add_argument('--data_path', default='/content/mnist_permutations.pkl',
+    parser.add_argument('--data_path', default='/mnt/dataset/lsun/Reinforced-Continual-Learning/mnist_permutations.pkl',
                         help='path where data is located')
     parser.add_argument('--state_space', type=int, default=30, help="the state space for search") 
     parser.add_argument('--actions_num', type=int, default=2, help="how many actions to dscide")
