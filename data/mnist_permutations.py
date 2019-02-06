@@ -5,12 +5,13 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--o', default='/content/mnist_permutations.pkl', help='output file')
+parser.add_argument('--o', default='/mnt/dataset/lsun/Reinforced-Continual-Learning/mnist_permutations.pkl', help='output file')
 parser.add_argument('--n_tasks', default=10, type=int, help='number of tasks')
 parser.add_argument('--seed', default=100, type=int, help='random seed')
+parser.add_argument('--data_path', default='/mnt/dataset/lsun/Reinforced-Continual-Learning/MNIST_data', help='data path')
 args = parser.parse_args()
 np.random.seed(args.seed)
-data = input_data.read_data_sets('/content/MNIST_data', one_hot=True)
+data = input_data.read_data_sets(args.data_path, one_hot=True)
 x_tr = data.train.images
 y_tr = data.train.labels
 
