@@ -5,13 +5,13 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--o', default='/mnt/dataset/lsun/Reinforced-Continual-Learning/mnist_permutations.pkl', help='output file')
+parser.add_argument('--data_path', default='/mnt/dataset/lsun/Reinforced-Continual-Learning/mnist_permutations.pkl', help='output file')
 parser.add_argument('--n_tasks', default=10, type=int, help='number of tasks')
 parser.add_argument('--seed', default=100, type=int, help='random seed')
-parser.add_argument('--data_path', default='/mnt/dataset/lsun/Reinforced-Continual-Learning/MNIST_data', help='data path')
+parser.add_argument('--tf_data_path', default='/mnt/dataset/lsun/Reinforced-Continual-Learning/MNIST_data', help='tf data path')
 args = parser.parse_args()
 np.random.seed(args.seed)
-data = input_data.read_data_sets(args.data_path, one_hot=True)
+data = input_data.read_data_sets(args.tf_data_path, one_hot=True)
 x_tr = data.train.images
 y_tr = data.train.labels
 
@@ -25,6 +25,6 @@ permutations = []
 for i in range(args.n_tasks):
     indices = np.random.permutation(784)
     permutations.append((x_tr[:, indices], y_tr, x_val[:, indices], y_val, x_te[:, indices], y_te))
-f = open(args.o, "wb")
+f = open(args.data_path, "wb")
 pickle.dump(permutations, f)
 f.close()
