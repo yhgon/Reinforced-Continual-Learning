@@ -5,10 +5,10 @@ Created on Fri Jan 12 19:27:34 2018
 @author: Jason
 """
 import warnings
-warnings.filterwarnings("ignore")
-import tensorflow as tf
+#warnings.filterwarnings("ignore")
+#import tensorflow as tf
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL']='3'
+#os.environ['TF_CPP_MIN_LOG_LEVEL']='3'
 import numpy as np
 from evaluate import evaluate
 from policy_gradient import Controller
