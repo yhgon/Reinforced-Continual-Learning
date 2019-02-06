@@ -92,6 +92,10 @@ class RCL:
                     self.best_params[task_id] = [accuracy_test,self.vars]
             else:
                 print("DEBUG : task{}/{} start ELSE".format(task_id, self.num_tasks) )
+                print("DEBUG : task{}/{} reset_default_graph ELSE".format(task_id, self.num_tasks) )
+                tf.reset_default_graph()
+                print("DEBUG : task{}/{} reset_default_graph ELSE".format(task_id, self.num_tasks) )
+                print("DEBUG : task{}/{} start Controller ELSE".format(task_id, self.num_tasks) )
                 controller = Controller(self.args)
                 print("DEBUG : taks{}/{} ELSE finish Controller ".format(task_id, self.num_tasks) )
                 results = []
