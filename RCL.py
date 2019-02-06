@@ -76,14 +76,15 @@ class RCL:
                         sess.run(tf.global_variables_initializer())
                         l = len(self.task_list[0][1])
                         for epoch in range(self.epochs):
-                            print("task {}/{}  epoch {} run for {} ".format(task_id, self.num_tasks, epoch, l  ) )                            
+                            print("task {}/{}  epoch {} run for {} IF ".format(task_id, self.num_tasks, epoch, l  ) )                            
                             flag = 0
                             for _ in range(l//self.batch_size+1):                                
                                 batch_xs, batch_ys = (self.task_list[task_id][0][flag:flag+self.batch_size],self.task_list[task_id][1][flag:flag+self.batch_size])
                                 flag += self.batch_size
                                 sess.run(train_step,feed_dict={inputs:batch_xs, y:batch_ys})
+                                print("task {}/{}  epoch {}  train_step {}/{}".format(task_id, self.num_tasks, epoch, flag, l) )
                         accuracy_test = sess.run(accuracy, feed_dict={inputs:self.task_list[task_id][4], y:self.task_list[task_id][5]})
-                        print("task {}/{} test accuracy: {} ".format(task_id, self.num_tasks, accuracy_test) )
+                        print("task {}/{} test accuracy: {} IF".format(task_id, self.num_tasks, accuracy_test) )
                         self.vars = sess.run([w1,b1,w2,b2,w3,b3])
                     self.best_params[task_id] = [accuracy_test,self.vars]
             else:
@@ -92,14 +93,14 @@ class RCL:
                 best_reward = 0
                 for trial in range(self.max_trials):
                     actions = controller.get_actions()
-                    print("task {}/{} trial {}/{} ***************actions************* for {} ".format(task_id, self.num_tasks, trial, actions, self.max_trials) )
+                    print("task {}/{} trial {}/{} *********actions  for {} ELSE ".format(task_id, self.num_tasks, trial, self.max_trials, actions) )
                     accuracy_val, accuracy_test = self.evaluates.evaluate_action(var_list = self.vars, 
                              actions=actions, task_id = task_id)
 
                     results.append(accuracy_val)
-                    print("trial {}/{}, test accuracy: {}".format(trial, self.max_trials,accuracy_test) )
+                    print("task {}/{}  trial {}/{}, test accuracy: {} ELSE".format(task_id, self.num_tasks, trial, self.max_trials, accuracy_test) )
                     reward = accuracy_val - self.penalty*sum(actions)
-                    print("                      reward: {}".format(reward) )
+                    print("                                    reward: {} ELSE".format(reward) )
                     if reward > best_reward:
                         best_reward = reward
                         self.best_params[task_id] = (accuracy_test, self.evaluates.var_list)
