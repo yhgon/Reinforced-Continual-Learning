@@ -45,9 +45,11 @@ class RCL:
         self.best_params={}
         self.result_process = []
         for task_id in range(0,self.num_tasks):
+            print("DEBUG : task{}/{} start task loop".format(task_id, self.num_tasks) )
             self.best_params[task_id] = [0,0]
+            print("DEBUG : task{}/{} end reset best_params".format(task_id, self.num_tasks) )
             if task_id == 0:
-                print("DEBUG : taks{}/{} IF".format(task_id, self.num_tasks) )
+                print("DEBUG : task{}/{} IF".format(task_id, self.num_tasks) )
                 with tf.Graph().as_default() as g:
                     with tf.name_scope("before"):
                         inputs = tf.placeholder(shape=(None, 784), dtype=tf.float32)
@@ -89,7 +91,7 @@ class RCL:
                         self.vars = sess.run([w1,b1,w2,b2,w3,b3])
                     self.best_params[task_id] = [accuracy_test,self.vars]
             else:
-                print("DEBUG : taks{}/{} ELSE".format(task_id, self.num_tasks) )
+                print("DEBUG : task{}/{} start ELSE".format(task_id, self.num_tasks) )
                 controller = Controller(self.args)
                 print("DEBUG : taks{}/{} ELSE finish Controller ".format(task_id, self.num_tasks) )
                 results = []
