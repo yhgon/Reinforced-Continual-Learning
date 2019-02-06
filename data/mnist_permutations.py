@@ -5,7 +5,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--o', default='./mnist_permutations.pkl', help='output file')
+parser.add_argument('--o', default='./data/mnist_permutations.pkl', help='output file')
 parser.add_argument('--n_tasks', default=10, type=int, help='number of tasks')
 parser.add_argument('--seed', default=100, type=int, help='random seed')
 args = parser.parse_args()
