@@ -4,7 +4,7 @@ Created on Fri Jan 12 19:27:34 2018
 
 @author: Jason
 """
-import warnings
+#import warnings
 #warnings.filterwarnings("ignore")
 import tensorflow as tf
 import os
