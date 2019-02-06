@@ -100,7 +100,7 @@ class RCL:
                     results.append(accuracy_val)
                     print("task {}/{}  trial {}/{}, test accuracy: {} ELSE".format(task_id, self.num_tasks, trial, self.max_trials, accuracy_test) )
                     reward = accuracy_val - self.penalty*sum(actions)
-                    print("                                    reward: {} ELSE".format(reward) )
+                    print("                              reward: {} ELSE".format(reward) )
                     if reward > best_reward:
                         best_reward = reward
                         self.best_params[task_id] = (accuracy_test, self.evaluates.var_list)
