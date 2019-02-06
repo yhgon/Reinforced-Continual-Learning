@@ -76,14 +76,14 @@ class RCL:
                         sess.run(tf.global_variables_initializer())
                         l = len(self.task_list[0][1])
                         for epoch in range(self.epochs):
-                            print("task {}  epoch {}  ".format(task_id, epoch  ) )                            
+                            print("task {}  epoch {} run for {} ".format(task_id, epoch, l  ) )                            
                             flag = 0
                             for _ in range(l//self.batch_size+1):                                
                                 batch_xs, batch_ys = (self.task_list[task_id][0][flag:flag+self.batch_size],self.task_list[task_id][1][flag:flag+self.batch_size])
                                 flag += self.batch_size
                                 sess.run(train_step,feed_dict={inputs:batch_xs, y:batch_ys})
                         accuracy_test = sess.run(accuracy, feed_dict={inputs:self.task_list[task_id][4], y:self.task_list[task_id][5]})
-                        print("test accuracy: ", accuracy_test)
+                        print("task {} test accuracy: {} ".format(task_id, accuracy_test) )
                         self.vars = sess.run([w1,b1,w2,b2,w3,b3])
                     self.best_params[task_id] = [accuracy_test,self.vars]
             else:
