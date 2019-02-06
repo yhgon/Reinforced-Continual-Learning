@@ -116,7 +116,7 @@ class RCL:
                     print("DEBUG : taks{}/{} trial {}/{} ELSE end trial internal loop for train_control ".format(task_id, self.num_tasks,trial, self.max_trials) )
                     
                 print("DEBUG : taks{}/{} ELSE end trial loop ".format(task_id, self.num_tasks) )
-                controller.close_session()
+                #controller.close_session()
                 print("DEBUG : taks{}/{} ELSE end controller session ".format(task_id, self.num_tasks) )
                 self.result_process.append(results)
                 print("DEBUG : taks{}/{} ELSE end result append ".format(task_id, self.num_tasks) )
