@@ -47,6 +47,7 @@ class RCL:
         for task_id in range(0,self.num_tasks):
             self.best_params[task_id] = [0,0]
             if task_id == 0:
+                print("DEBUG : taks{}/{} IF".format(task_id, self.num_tasks) )
                 with tf.Graph().as_default() as g:
                     with tf.name_scope("before"):
                         inputs = tf.placeholder(shape=(None, 784), dtype=tf.float32)
@@ -88,9 +89,13 @@ class RCL:
                         self.vars = sess.run([w1,b1,w2,b2,w3,b3])
                     self.best_params[task_id] = [accuracy_test,self.vars]
             else:
+                print("DEBUG : taks{}/{} ELSE".format(task_id, self.num_tasks) )
                 controller = Controller(self.args)
+                print("DEBUG : taks{}/{} ELSE finish Controller ".format(task_id, self.num_tasks) )
                 results = []
+                print("DEBUG : taks{}/{} ELSE result Controller ".format(task_id, self.num_tasks) )
                 best_reward = 0
+                print("DEBUG : taks{}/{} ELSE start trial loop ".format(task_id, self.num_tasks) )
                 for trial in range(self.max_trials):
                     actions = controller.get_actions()
                     print("task {}/{} trial {}/{} *********actions  for {} ELSE ".format(task_id, self.num_tasks, trial, self.max_trials, actions) )
@@ -104,10 +109,18 @@ class RCL:
                     if reward > best_reward:
                         best_reward = reward
                         self.best_params[task_id] = (accuracy_test, self.evaluates.var_list)
+                        print("DEBUG : taks{}/{} trial {}/{} ELSE done best_reward ".format(task_id, self.num_tasks) )
                     controller.train_controller(reward)
+                    print("DEBUG : taks{}/{} trial {}/{} ELSE end trial internal loop for train_control ".format(task_id, self.num_tasks,trial, self.max_trials) )
+                    
+                print("DEBUG : taks{}/{} ELSE end trial loop ".format(task_id, self.num_tasks) )
                 controller.close_session()
+                print("DEBUG : taks{}/{} ELSE end controller session ".format(task_id, self.num_tasks) )
                 self.result_process.append(results)
+                print("DEBUG : taks{}/{} ELSE end result append ".format(task_id, self.num_tasks) )
                 self.vars = self.best_params[task_id][1]
+                print("DEBUG : taks{}/{} ELSE end self vars ".format(task_id, self.num_tasks) )
+                print("DEBUG : taks{}/{} ELSE end loop ".format(task_id, self.num_tasks) )
         
 if __name__ == "__main__":
     print("DEBUG : RCL.py step1. start...")
