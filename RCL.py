@@ -109,7 +109,7 @@ class RCL:
                     if reward > best_reward:
                         best_reward = reward
                         self.best_params[task_id] = (accuracy_test, self.evaluates.var_list)
-                        print("DEBUG : taks{}/{} trial {}/{} ELSE done best_reward ".format(task_id, self.num_tasks) )
+                        print("DEBUG : taks{}/{} trial {}/{} ELSE done best_reward ".format(task_id, self.num_tasks, trial, self.max_trials) )
                     controller.train_controller(reward)
                     print("DEBUG : taks{}/{} trial {}/{} ELSE end trial internal loop for train_control ".format(task_id, self.num_tasks,trial, self.max_trials) )
                     
