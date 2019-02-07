@@ -26,8 +26,8 @@ class evaluate:
             with tf.name_scope("model"):
                 self.x = tf.placeholder(tf.float32,shape=[None,784]) 
                 self.y = tf.placeholder(tf.float32,shape=[None,10])
-                for i in var_list:
-                    print("DEBUG : ",var_list[i], var_list[i].shape )
+                for i,value in  enumerate(var_list ):
+                    print("DEBUG : ",value[i], value[i].shape )
                 fc1 = tf.Variable(tf.concat([var_list[0],tf.truncated_normal((var_list[0].shape[0],actions[0]),stddev=0.01)],axis=1))
                 b1 = tf.Variable(tf.concat([var_list[1],tf.constant(0.1,shape=(actions[0],))],axis=0))
                 mask_fc1 = np.concatenate([np.zeros_like(var_list[0]),np.ones((var_list[0].shape[0],actions[0]))],axis=1)
