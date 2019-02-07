@@ -70,7 +70,7 @@ class RCL:
                         conv2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
                         conv2_shape = conv2.get_shape().as_list()
                         print("DEBUG conv2_shape:"conv2_shape)
-                        conv2 = tf.reshape(conv2, [conv2_shape[0], conv2_shape[1] * conv2_shape[2] * conv2_shape[3]])
+                        conv2 = tf.reshape(conv2, [-1, conv2_shape[1] * conv2_shape[2] * conv2_shape[3]])
                         fcn= tf.nn.relu(tf.matmul(conv2, w3) + b3)
                         output3=tf.matmul(fcn, w4) + b4
                         loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=output3)) + \
