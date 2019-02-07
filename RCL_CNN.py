@@ -62,7 +62,7 @@ class RCL:
                         b3 = tf.Variable(tf.constant(0.1, shape=(1024, )))
                         w4 = tf.Variable(tf.truncated_normal([1024, 10], stddev=0.1))
                         b4 = tf.Variable(tf.constant(0.1, shape=(10,)))
-                        conv1 = tf.nn.relu(tf.nn.conv2d(data, w1, strides=[1, 2, 2, 1], padding='SAME') + b1)
+                        conv1 = tf.nn.relu(tf.nn.conv2d(inputs, w1, strides=[1, 2, 2, 1], padding='SAME') + b1)
                         conv1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
                         conv2 = tf.nn.relu(tf.nn.conv2d(conv1, w2, strides=[1, 2, 2, 1], padding='SAME') + b2)
                         conv2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
