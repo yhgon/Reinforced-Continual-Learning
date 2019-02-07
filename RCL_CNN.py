@@ -96,7 +96,9 @@ class RCL:
                         l = len(self.task_list[0][1])
                         inputs_shape= inputs.get_shape().as_list()
                         print("DEBUG input_shape before:",inputs_shape)
-                        inputs=tf.reshape(inputs, shape=[-1,28,28,1]) # 28x28
+                        inputs=tf.reshape(inputs, shape=[-1,784]) # 28x28
+                        inputs_shape= inputs.get_shape().as_list()
+                        print("DEBUG input_shape after:",inputs_shape)                        
                         for epoch in range(self.epochs):
                             print("task {}/{}  epoch {} run for {} IF ".format(task_id, self.num_tasks, epoch, l  ) )                            
                             flag = 0
