@@ -94,6 +94,9 @@ class RCL:
                         sess = self.create_session()
                         sess.run(tf.global_variables_initializer())
                         l = len(self.task_list[0][1])
+                        inputs_shape= inputs.get_shape().as_list()
+                        print("DEBUG input_shape before:",inputs_shape)
+                        inputs=tf.reshape(inputs, shape=[-1,28,28,1]) # 28x28
                         for epoch in range(self.epochs):
                             print("task {}/{}  epoch {} run for {} IF ".format(task_id, self.num_tasks, epoch, l  ) )                            
                             flag = 0
