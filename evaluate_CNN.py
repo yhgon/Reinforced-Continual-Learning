@@ -1,3 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Jan 13 11:01:59 2018
+
+@author: Jason
+"""
+import tensorflow as tf
+import numpy as np
+import pdb
+
+
+class evaluate:
+    def __init__(self,task_list,args):
+        self.epochs = args.n_epochs
+        self.batch_size = args.batch_size
+        self.lr = args.lr
+        self.optimizer = args.optimizer
+        self.task_list = task_list
+        self.stamps={}
+        
     def evaluate_action(self,var_list,actions,task_id):
         with tf.Graph().as_default() as g:
             self.sess = tf.Session(graph=g)
@@ -6,10 +26,8 @@
             with tf.name_scope("model"):
                 self.x = tf.placeholder(tf.float32,shape=[None,784]) 
                 self.y = tf.placeholder(tf.float32,shape=[None,10])
-                
                 for i in range(var_list):
                     print("DEBUG : "var_list[i], var_list[i].shape )
-                
                 fc1 = tf.Variable(tf.concat([var_list[0],tf.truncated_normal((var_list[0].shape[0],actions[0]),stddev=0.01)],axis=1))
                 b1 = tf.Variable(tf.concat([var_list[1],tf.constant(0.1,shape=(actions[0],))],axis=0))
                 mask_fc1 = np.concatenate([np.zeros_like(var_list[0]),np.ones((var_list[0].shape[0],actions[0]))],axis=1)
@@ -66,3 +84,15 @@
             self.stamps[task_id]=[_.shape for _ in self.var_list]
             self.sess.close()
             return (accuracy_val,accuracy_test)
+
+    def conv2d(self,x, W): 
+        return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
+
+    def max_pool_2x2(self,x):
+            return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],strides=[1, 2, 2, 1], padding='SAME')
+
+    def apply_prune_on_grads(self,grads_and_vars, total_mask):
+        for i in range(0,len(total_mask),2):
+            grads_and_vars[i] = (tf.multiply(grads_and_vars[i][0], total_mask[i]),grads_and_vars[i][1])
+            grads_and_vars[i+1] = (tf.multiply(grads_and_vars[i+1][0], total_mask[i+1]),grads_and_vars[i+1][1])
+        return grads_and_vars
