@@ -65,10 +65,10 @@ class RCL:
                         ## model
                         inputs_shape= inputs.get_shape().as_list()
                         print("DEBUG input_shape before:",inputs_shape)
-                        inputs=tf.reshape(inputs, shape=[-1,28,28,1]) # 28x28
-                        inputs_shape= inputs.get_shape().as_list()
+                        inputx=tf.reshape(inputs, shape=[-1,28,28,1]) # 28x28
+                        inputs_shape= inputx.get_shape().as_list()
                         print("DEBUG input_shape after :",inputs_shape)
-                        conv1 = tf.nn.relu(tf.nn.conv2d(inputs, w1,    strides=[1,2,2,1], padding='SAME') + b1)
+                        conv1 = tf.nn.relu(tf.nn.conv2d(inputx, w1,    strides=[1,2,2,1], padding='SAME') + b1)
                         conv1 = tf.nn.max_pool(conv1, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
                         conv2 = tf.nn.relu(tf.nn.conv2d(conv1, w2,     strides=[1,2,2,1], padding='SAME') + b2)
                         conv2 = tf.nn.max_pool(conv2, ksize=[1,2,2,1], strides=[1,2,2,1], padding='SAME')
@@ -96,8 +96,7 @@ class RCL:
                         l = len(self.task_list[0][1])
                         inputs_shape= inputs.get_shape().as_list()
                         print("DEBUG input_shape before:",inputs_shape)
-                        inputs=tf.reshape(inputs, shape=[-1,784]) # 28x28
-                        inputs_shape= inputs.get_shape().as_list()
+                        inputs_shape= inputx.get_shape().as_list()
                         print("DEBUG input_shape after:",inputs_shape)                        
                         for epoch in range(self.epochs):
                             print("task {}/{}  epoch {} run for {} IF ".format(task_id, self.num_tasks, epoch, l  ) )                            
