@@ -65,7 +65,7 @@ class RCL:
                         ## model
                         inputs_shape= inputs.get_shape().as_list()
                         print("DEBUG input_shape before:",inputs_shape)
-                        inputs=tf.reshape(inputs, shape=[-1, tf.math.sqrt(inputs_shape[1]), tf.math.sqrt(inputs_shape[1]), 1]) # 28x28
+                        inputs=tf.reshape(inputs, shape=[-1, 28,28, 1]) # 28x28
                         print("DEBUG input_shape after :",inputs_shape)
                         conv1 = tf.nn.relu(tf.nn.conv2d(inputs, w1,       strides=[1, 2, 2, 1], padding='SAME') + b1)
                         conv1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
