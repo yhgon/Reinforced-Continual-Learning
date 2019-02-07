@@ -26,8 +26,8 @@ class evaluate:
             with tf.name_scope("model"):
                 self.x = tf.placeholder(tf.float32,shape=[None,784]) 
                 self.y = tf.placeholder(tf.float32,shape=[None,10])
-                for i,value in  enumerate(var_list ):
-                    print("DEBUG : ", i, value[i].shape  )
+#                for i,value in  enumerate(var_list ):
+#                    print("DEBUG : ", i, value[i].shape  )
 #DEBUG :  0 (312,)
 #DEBUG :  1 ()
 #DEBUG :  2 (128,)
