@@ -10,7 +10,7 @@ import tensorflow as tf
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL']='3'
 import numpy as np
-from evaluate import evaluate
+from evaluate_CNN import evaluate
 from policy_gradient import Controller
 import argparse
 import datetime
